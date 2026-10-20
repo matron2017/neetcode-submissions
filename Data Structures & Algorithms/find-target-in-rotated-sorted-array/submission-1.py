@@ -1,0 +1,38 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l = 0
+        n = len(nums)
+        r = n - 1
+
+        while r > l:
+            m = (l+r) // 2
+            if nums[m] > nums[r]:
+                l = m + 1
+            else:
+                r = m
+        min_num = r
+
+        def binary_search(l, r):
+            m = (l+r) // 2
+
+            while r >= l:
+                number = nums[m]
+                if number != target:
+                    if target > number:
+                        l = m + 1
+                        m = (l+r) // 2
+                    else:
+                        r = m - 1
+                        m = (l+r) // 2
+                else:
+                    return m
+
+            return -1
+        
+        if min_num == 0:
+            return binary_search(0, n-1)
+        elif nums[min_num] <= target <= nums[n-1]:
+            return binary_search(min_num, n-1)
+        else:
+            return binary_search(0, min_num - 1)
+            

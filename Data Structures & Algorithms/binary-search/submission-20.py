@@ -1,0 +1,25 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        l = 0
+        r = n - 1
+        #when they go over eahc ohter only
+        # can be same and need to be in the end
+        while l <= r:
+            m = (l+r) // 2
+            
+            if nums[m] != target:
+                if nums[m] > target:
+                    r = m - 1
+                    m = (l+r) // 2
+                else:
+                    l = m + 1
+                    m = (l+r) // 2
+
+            else:
+                return m
+
+
+
+        
+        return -1
